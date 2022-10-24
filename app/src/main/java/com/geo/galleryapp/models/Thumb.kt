@@ -1,6 +1,6 @@
 package com.geo.galleryapp.models
 
-data class LargeThumb(
+data class Thumb(
     val height: Int,
     val url: String,
     val width: Int

@@ -19,9 +19,19 @@ android {
     }
 
     buildTypes {
+        Properties properties = new Properties()
+        properties.load(project.rootProject.file('local.properties').newDataInputStream())
         release {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+            buildConfigField("String", "API_TOKEN", properties.getProperty('API_KEY'))
+            buildConfigField("String", "CUSTOMER_KEY", properties.getProperty('CUSTOMER_KEY'))
+            buildConfigField("String", "CUSTOMER_SECRET", properties.getProperty('CUSTOMER_SECRET'))
+        }
+        debug {
+            buildConfigField("String", "API_TOKEN", properties.getProperty('API_KEY'))
+            buildConfigField("String", "CUSTOMER_KEY", properties.getProperty('CUSTOMER_KEY'))
+            buildConfigField("String", "CUSTOMER_SECRET", properties.getProperty('CUSTOMER_SECRET'))
         }
     }
     compileOptions {
@@ -30,6 +40,7 @@ android {
     }
     kotlinOptions {
         jvmTarget = '1.8'
+        freeCompilerArgs += "-opt-in=kotlin.RequiresOptIn"
     }
     buildFeatures {
         viewBinding true
@@ -38,14 +49,16 @@ android {
 
 dependencies {
 
-    implementation 'androidx.core:core-ktx:1.9.0'
-    implementation 'androidx.appcompat:appcompat:1.5.1'
+    implementation 'androidx.core:core-ktx:1.8.0'
+    implementation 'androidx.appcompat:appcompat:1.5.0'
     implementation 'com.google.android.material:material:1.6.1'
     implementation 'androidx.constraintlayout:constraintlayout:2.1.4'
     implementation 'androidx.recyclerview:recyclerview:1.2.1'
     implementation "androidx.activity:activity-ktx:$activity_version"
+    implementation 'androidx.swiperefreshlayout:swiperefreshlayout:1.1.0'
     //Paging
     implementation "androidx.paging:paging-runtime:$paging_version"
+
     // Retrofit
     implementation "com.squareup.retrofit2:retrofit:$retrofit"
     implementation "com.squareup.retrofit2:converter-gson:$retrofit"
@@ -64,7 +77,15 @@ dependencies {
     kapt "androidx.room:room-compiler:$rootProject.room_version"
     // Dagger-hilt components
     implementation "com.google.dagger:hilt-android:$rootProject.hilt_version"
-    kapt "com.google.dagger:hilt-compiler:$rootProject.hilt_version"// For local unit tests
+    kapt "com.google.dagger:hilt-compiler:$rootProject.hilt_version"
+    // glide
+    implementation ("com.github.bumptech.glide:glide:4.14.2"){
+        exclude group: "com.android.support"
+    }
+    kapt 'com.github.bumptech.glide:compiler:4.14.2'
+    //picasso
+    implementation 'com.squareup.picasso:picasso:2.8'
+    // For local unit tests
     testImplementation "junit:junit:$rootProject.junit_version"
     testImplementation "com.google.dagger:hilt-android-testing:$rootProject.hilt_version"
     testImplementation "androidx.arch.core:core-testing:2.1.0"

@@ -2,4 +2,6 @@
     <string name="app_name">GalleryApp</string>
     <string name="search_hint">Start search</string>
     <string name="search_icon_cd">image view for search icon</string>
+    <string name="image_list_content">image list content</string>
+    <string name="retry">Retry</string>
 </resources>

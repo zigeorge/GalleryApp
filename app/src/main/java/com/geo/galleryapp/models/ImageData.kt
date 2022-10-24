@@ -2,12 +2,13 @@ package com.geo.galleryapp.models
 
 import androidx.room.Entity
 import androidx.room.PrimaryKey
-import com.geo.galleryapp.other.Constants.GALLERY_TABLE
+import com.geo.galleryapp.other.Constants.IMAGE_DATA
+import java.io.Serializable
 
 @Entity(
-    tableName = GALLERY_TABLE
+    tableName = IMAGE_DATA
 )
-data class Data(
+data class ImageData(
     val aspect: Double,
     val assets: Assets,
     val contributor: Contributor,
@@ -17,4 +18,6 @@ data class Data(
     val id: String,
     val image_type: String,
     val media_type: String
-)
+): Serializable {
+    var indexInResponse: Int = -1
+}

@@ -6,6 +6,8 @@ import com.geo.galleryapp.api.GalleryAPI
 import com.geo.galleryapp.api.RetrofitInstance
 import com.geo.galleryapp.db.GalleryDb
 import com.geo.galleryapp.other.Constants.DB_NAME
+import com.geo.galleryapp.repository.GalleryDbRepository
+import com.geo.galleryapp.repository.GalleryRepository
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -33,5 +35,12 @@ object AppModule {
     @Provides
     fun provideDao(
         db: GalleryDb
-    ) = db.galleryDao()
+    ) = db.imageDataDao()
+
+    @Singleton
+    @Provides
+    fun provideRepository(
+        api: GalleryAPI,
+        db: GalleryDb
+    ) = GalleryDbRepository(api, db) as GalleryRepository
 }
