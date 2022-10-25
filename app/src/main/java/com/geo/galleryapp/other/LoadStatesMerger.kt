@@ -1,25 +1,13 @@
 package com.geo.galleryapp.other
 
-import androidx.annotation.VisibleForTesting
-import androidx.paging.CombinedLoadStates
-import androidx.paging.LoadState
-import androidx.paging.LoadState.NotLoading
+import androidx.paging.*
 import androidx.paging.LoadState.Loading
-import androidx.paging.LoadStates
+import androidx.paging.LoadState.NotLoading
+import androidx.paging.LoadType.REFRESH
 import androidx.paging.PagingSource.LoadResult.Error
-import kotlinx.coroutines.ExperimentalCoroutinesApi
+import com.geo.galleryapp.other.MergedState.*
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.scan
-import androidx.paging.PagingDataAdapter
-import androidx.paging.RemoteMediator
-import androidx.paging.PagingSource
-import androidx.paging.LoadType.REFRESH
-import androidx.paging.LoadType
-import com.geo.galleryapp.other.MergedState.NOT_LOADING
-import com.geo.galleryapp.other.MergedState.REMOTE_STARTED
-import com.geo.galleryapp.other.MergedState.REMOTE_ERROR
-import com.geo.galleryapp.other.MergedState.SOURCE_ERROR
-import com.geo.galleryapp.other.MergedState.SOURCE_LOADING
 
 /**
  * Converts the raw [CombinedLoadStates] [Flow] from [PagingDataAdapter.loadStateFlow] into a new

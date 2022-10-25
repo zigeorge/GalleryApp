@@ -17,16 +17,6 @@ class Converters {
     }
 
     @TypeConverter
-    fun fromThumb(thumb: Thumb): String {
-        return Gson().toJson(thumb)
-    }
-
-    @TypeConverter
-    fun toThumb(thumb: String): Thumb {
-        return Gson().fromJson(thumb, Thumb::class.java)
-    }
-
-    @TypeConverter
     fun fromContributor(contributor: Contributor): String {
         return Gson().toJson(contributor)
     }

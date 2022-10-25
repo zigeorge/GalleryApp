@@ -5,17 +5,14 @@ import androidx.paging.PagingDataAdapter
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.geo.galleryapp.models.ImageData
-import com.geo.galleryapp.other.Constants.IMAGE_VIEW_TYPE
-import com.geo.galleryapp.other.Constants.NETWORK_VIEW_TYPE
-import com.geo.galleryapp.other.GlideRequests
 
 /**
  * [RecyclerView.Adapter] that can display a [ImageData].
  */
-class ImagesAdapter(private val glide: GlideRequests)
+class ImagesAdapter()
     : PagingDataAdapter<ImageData, ImagesViewHolder>(ImageComparator()) {
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ImagesViewHolder {
-        return ImagesViewHolder.create(parent, glide)
+        return ImagesViewHolder.create(parent)
     }
 
     override fun onBindViewHolder(holder: ImagesViewHolder, position: Int) {

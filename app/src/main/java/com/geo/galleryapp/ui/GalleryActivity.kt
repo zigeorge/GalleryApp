@@ -3,8 +3,6 @@ package com.geo.galleryapp.ui
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
-import android.util.Log
-import android.view.KeyEvent
 import android.view.View.GONE
 import android.view.View.VISIBLE
 import android.view.inputmethod.EditorInfo
@@ -14,9 +12,6 @@ import androidx.lifecycle.lifecycleScope
 import androidx.paging.LoadState
 import androidx.recyclerview.widget.GridLayoutManager
 import com.geo.galleryapp.databinding.ActivityGalleryBinding
-import com.geo.galleryapp.other.Constants.IMAGE_VIEW_TYPE
-import com.geo.galleryapp.other.Constants.NETWORK_VIEW_TYPE
-import com.geo.galleryapp.other.GlideApp
 import com.geo.galleryapp.other.asMergedLoadStates
 import com.geo.galleryapp.ui.adapters.ImageLoadStateAdapter
 import com.geo.galleryapp.ui.adapters.ImagesAdapter
@@ -84,17 +79,9 @@ class GalleryActivity : AppCompatActivity() {
     }
 
     private fun initAdapter() {
-        imagesAdapter = ImagesAdapter(GlideApp.with(this))
+        imagesAdapter = ImagesAdapter()
         val loaderStateAdapter = ImageLoadStateAdapter(imagesAdapter)
         val gridLayoutManager = GridLayoutManager(this, 2)
-//        gridLayoutManager.spanSizeLookup = object : GridLayoutManager.SpanSizeLookup() {
-//            override fun getSpanSize(position: Int): Int {
-//                val viewType = imagesAdapter.getItemViewType(position)
-//                Log.e("TYPE", "$viewType")
-//                return if(viewType == NETWORK_VIEW_TYPE) 1
-//                else 2
-//            }
-//        }
         binding.images.apply {
             this.layoutManager = gridLayoutManager
             this.setHasFixedSize(true)

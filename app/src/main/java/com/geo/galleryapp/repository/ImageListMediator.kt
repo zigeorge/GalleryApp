@@ -14,7 +14,6 @@ import com.geo.galleryapp.models.RemoteKeys
 import com.geo.galleryapp.other.Constants.DEFAULT_PAGE_INDEX
 import retrofit2.HttpException
 import java.io.IOException
-import java.io.InvalidObjectException
 
 @OptIn(ExperimentalPagingApi::class)
 class ImageListMediator(
