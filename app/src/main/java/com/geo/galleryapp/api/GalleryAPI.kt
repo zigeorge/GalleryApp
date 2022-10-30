@@ -12,6 +12,6 @@ interface GalleryAPI {
         @Query("per_page") perPage: Int,
         @Query("page") page: Int,
         @Query("key") query: String
-    ): Response<ImageSearchResponse?>
+    ): ImageSearchResponse?
 
 }

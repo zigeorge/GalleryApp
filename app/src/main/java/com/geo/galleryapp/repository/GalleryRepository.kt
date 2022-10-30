@@ -8,6 +8,4 @@ interface GalleryRepository {
     fun getImage(
         query: String
     ): Flow<PagingData<ImageData>>
-
-    fun getHudaiImage(): Flow<List<ImageData>>
 }

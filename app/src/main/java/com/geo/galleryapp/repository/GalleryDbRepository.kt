@@ -26,22 +26,7 @@ class GalleryDbRepository @Inject constructor(
                 initialLoadSize = PAGE_SIZE
             ),
             pagingSourceFactory = pagingSourceFactory,
-            remoteMediator = ImageListMediator(db, api, query)
+            remoteMediator = ImageDataMediator(db, api, query)
         ).flow
-    }
-
-    /*= Pager(
-        config = PagingConfig(
-            pageSize = PAGE_SIZE,
-            enablePlaceholders = true,
-            maxSize = 60
-        ),
-        remoteMediator = ImageListMediator(db, api, query)
-    ) {
-        db.imageDataDao().galleryImages(query)
-    }.flow*/
-
-    override fun getHudaiImage(): Flow<List<ImageData>> {
-        return db.imageDataDao().galleryHudaiImages()
     }
 }

@@ -5,5 +5,6 @@ data class ImageSearchResponse(
     val page: Int,
     val per_page: Int,
     val search_id: String,
-    val total_count: Int
+    val total_count: Int,
+    val message: String? = null
 )

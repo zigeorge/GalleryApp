@@ -1,5 +1,6 @@
 package com.geo.galleryapp.db
 
+import android.media.Image
 import androidx.paging.PagingSource
 import androidx.room.Dao
 import androidx.room.Insert
@@ -14,11 +15,11 @@ interface ImageDataDao {
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun insertAll(imageList: List<ImageData>)
 
-    @Query("SELECT * FROM image_data WHERE description LIKE :searchString ORDER BY indexInResponse ASC")
+    @Query("SELECT * FROM image_data WHERE description LIKE '%'||:searchString||'%' ORDER BY indexInResponse ASC")
     fun galleryImages(searchString: String): PagingSource<Int, ImageData>
 
-    @Query("SELECT * FROM image_data")
-    fun galleryHudaiImages(): Flow<List<ImageData>>
+    @Query("SELECT COUNT(*) FROM image_data")
+    fun count(): Int
 
     @Query("DELETE FROM image_data")
     suspend fun delete()
