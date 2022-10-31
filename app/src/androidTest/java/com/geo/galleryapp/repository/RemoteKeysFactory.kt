@@ -6,7 +6,7 @@ import com.geo.galleryapp.models.RemoteKeys
 class RemoteKeysFactory {
     private var defaultRepoId = 1994710325
 
-    fun create(id: Int, key: Int) : RemoteKeys {
+    private fun create(id: Int, key: Int) : RemoteKeys {
         val next = if (key == 100) {
             null
         } else key + 1

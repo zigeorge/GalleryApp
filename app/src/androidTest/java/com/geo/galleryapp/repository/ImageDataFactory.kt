@@ -11,7 +11,7 @@ class ImageDataFactory {
     private var defaultId = 1994710325
     private var defaultContributorId = 301519563
 
-    fun create(id: Int, contributorId: Int): ImageData {
+    private fun create(id: Int, contributorId: Int): ImageData {
         val imageData = ImageData(
             assets = Assets(
                 huge_thumb = Thumb(
@@ -59,9 +59,9 @@ class ImageDataFactory {
         return imageData
     }
 
-    fun fakeImages(): List<ImageData> {
+    fun fakeImages(total: Int = 100): List<ImageData> {
         val list = ArrayList<ImageData>()
-        repeat(100) {
+        repeat(total) {
             list.add(create(defaultId++, defaultContributorId++))
         }
         return list

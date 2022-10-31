@@ -24,12 +24,10 @@ android {
         release {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
-            buildConfigField("String", "API_TOKEN", properties.getProperty('API_KEY'))
             buildConfigField("String", "CUSTOMER_KEY", properties.getProperty('CUSTOMER_KEY'))
             buildConfigField("String", "CUSTOMER_SECRET", properties.getProperty('CUSTOMER_SECRET'))
         }
         debug {
-            buildConfigField("String", "API_TOKEN", properties.getProperty('API_KEY'))
             buildConfigField("String", "CUSTOMER_KEY", properties.getProperty('CUSTOMER_KEY'))
             buildConfigField("String", "CUSTOMER_SECRET", properties.getProperty('CUSTOMER_SECRET'))
         }

@@ -7,9 +7,10 @@ class FakeGalleryApi: GalleryAPI {
 
     companion object {
         private var index = 0
+        var error = false
     }
 
-    private val list = ArrayList<ImageData>()
+    private var list = ArrayList<ImageData>()
 
     fun addImageDataList(imageList: List<ImageData>) {
         list.addAll(imageList)
@@ -19,7 +20,8 @@ class FakeGalleryApi: GalleryAPI {
         perPage: Int,
         page: Int,
         query: String
-    ): ImageSearchResponse {
+    ): ImageSearchResponse? {
+        if (error) return null
         val data = ArrayList<ImageData>()
         var counter = 0
         if (page == 1) {
@@ -47,6 +49,12 @@ class FakeGalleryApi: GalleryAPI {
             search_id = "cbabc182-ce69-4628-a4e9-f00711ec156d",
             total_count = list.size,
         )
+    }
+
+    fun reset() {
+        index = 0
+        error = false
+        list = ArrayList()
     }
 }
 

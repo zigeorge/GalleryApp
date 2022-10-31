@@ -43,7 +43,9 @@ class ImageDataMediator(
                         ?.data?.lastOrNull()
                         ?.let { image -> remoteKeysDao.remoteKeysByRepoId(image.id) }
 
-                    if (currentPage?.nextKey == null) {
+                    if (currentPage == null) {
+                        return MediatorResult.Error(Exception("No Data"))
+                    } else if (currentPage.nextKey == null) {
                         return MediatorResult.Success(endOfPaginationReached = true)
                     }
                     currentPage.nextKey
@@ -77,10 +79,12 @@ class ImageDataMediator(
                 }
                 return MediatorResult.Success(endOfPaginationReached = items.isEmpty())
             }
-            return MediatorResult.Success(endOfPaginationReached = true)
+            return MediatorResult.Error(IOException())
         } catch (e: IOException) {
             return MediatorResult.Error(e)
         } catch (e: HttpException) {
+            return MediatorResult.Error(e)
+        } catch (e: Exception) {
             return MediatorResult.Error(e)
         }
     }

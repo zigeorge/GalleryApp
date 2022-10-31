@@ -8,6 +8,7 @@ import androidx.paging.cachedIn
 import com.geo.galleryapp.repository.GalleryRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.ExperimentalCoroutinesApi
+import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.flatMapLatest
 import javax.inject.Inject
 
@@ -17,9 +18,9 @@ class GalleryViewModel @Inject constructor(
     private val repository: GalleryRepository
 ): ViewModel() {
 
-    private val _searchTextState = MutableLiveData("")
+    private val _searchTextState = MutableStateFlow("")
 
-    val images = _searchTextState.asFlow().flatMapLatest {
+    val images = _searchTextState.flatMapLatest {
         repository.getImage(it)
     }
         .cachedIn(viewModelScope)
