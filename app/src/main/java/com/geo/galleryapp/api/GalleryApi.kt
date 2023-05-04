@@ -5,7 +5,7 @@ import retrofit2.Response
 import retrofit2.http.GET
 import retrofit2.http.Query
 
-interface GalleryAPI {
+interface GalleryApi {
 
     @GET("/v2/images/search")
     suspend fun searchImages(

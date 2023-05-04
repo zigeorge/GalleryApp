@@ -1,8 +1,6 @@
 package com.geo.galleryapp.ui
 
-import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import androidx.lifecycle.asFlow
 import androidx.lifecycle.viewModelScope
 import androidx.paging.cachedIn
 import com.geo.galleryapp.repository.GalleryRepository

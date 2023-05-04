@@ -4,9 +4,8 @@ import com.geo.galleryapp.models.Assets
 import com.geo.galleryapp.models.Contributor
 import com.geo.galleryapp.models.ImageData
 import com.geo.galleryapp.models.Thumb
-import java.util.concurrent.atomic.AtomicInteger
 
-class ImageDataFactory {
+class ImageDataFactoryTest {
 
     private var defaultId = 1994710325
     private var defaultContributorId = 301519563

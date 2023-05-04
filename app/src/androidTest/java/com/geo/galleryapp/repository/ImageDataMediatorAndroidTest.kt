@@ -1,7 +1,8 @@
 package com.geo.galleryapp.repository
 
 import androidx.paging.*
-import com.geo.galleryapp.api.FakeGalleryApi
+import androidx.test.filters.SmallTest
+import com.geo.galleryapp.api.FakeGalleryApiAndroidTest
 import com.geo.galleryapp.db.GalleryDb
 import com.geo.galleryapp.models.ImageData
 import com.google.common.truth.Truth.assertThat
@@ -18,16 +19,17 @@ import javax.inject.Named
 
 @ExperimentalPagingApi
 @ExperimentalCoroutinesApi
+@SmallTest
 @HiltAndroidTest
-class ImageDataMediatorTest {
-    private val mockApi = FakeGalleryApi()
+class ImageDataMediatorAndroidTest {
+    private val fakeApi = FakeGalleryApiAndroidTest()
 
     @get:Rule
     var hiltRule = HiltAndroidRule(this)
 
     @Inject
     @Named("test_gallery_db")
-    lateinit var database: GalleryDb
+    lateinit var fakeDb: GalleryDb
 
     @Before
     fun setUp() {
@@ -36,16 +38,16 @@ class ImageDataMediatorTest {
 
     @After
     fun tearDown() {
-        database.close()
-        mockApi.reset()
+        fakeDb.close()
+        fakeApi.reset()
     }
 
     @Test
     fun refreshLoadReturnsSuccessResultWhenMoreDataIsPresent() = runTest {
-        mockApi.addImageDataList(ImageDataFactory().fakeImages())
+        fakeApi.addImageDataList(ImageDataFactoryAndroidTest().fakeImages())
         val remoteMediator = ImageDataMediator(
-            database,
-            mockApi,
+            fakeDb,
+            fakeApi,
             ""
         )
         val pagingState = PagingState<Int, ImageData>(
@@ -62,8 +64,8 @@ class ImageDataMediatorTest {
     @Test
     fun refreshLoadSuccessAndEndOfPaginationWhenNoMoreData() = runTest {
         val remoteMediator = ImageDataMediator(
-            database,
-            mockApi,
+            fakeDb,
+            fakeApi,
             ""
         )
         val pagingState = PagingState<Int, ImageData>(
@@ -79,11 +81,11 @@ class ImageDataMediatorTest {
 
     @Test
     fun refreshLoadReturnsErrorResultWhenErrorOccurs() = runTest {
-        mockApi.addImageDataList(ImageDataFactory().fakeImages())
-        FakeGalleryApi.error = true
+        fakeApi.addImageDataList(ImageDataFactoryAndroidTest().fakeImages())
+        FakeGalleryApiAndroidTest.error = true
         val remoteMediator = ImageDataMediator(
-            database,
-            mockApi,
+            fakeDb,
+            fakeApi,
             ""
         )
         val pagingState = PagingState<Int, ImageData>(
@@ -97,11 +99,11 @@ class ImageDataMediatorTest {
     }
 
     @Test
-    fun appendLoadReturnsErrorResultWhenErrorOccurs() = runTest {
-        mockApi.addImageDataList(ImageDataFactory().fakeImages())
+    fun appendLoadSuccessAndEndOfPaginationWhenNoMoreData() = runTest {
+        fakeApi.addImageDataList(ImageDataFactoryAndroidTest().fakeImages())
         val remoteMediator = ImageDataMediator(
-            database,
-            mockApi,
+            fakeDb,
+            fakeApi,
             ""
         )
         val pagingState = PagingState<Int, ImageData>(
@@ -111,8 +113,8 @@ class ImageDataMediatorTest {
             10
         )
         val result = remoteMediator.load(LoadType.APPEND, pagingState)
-        assertThat(result is RemoteMediator.MediatorResult.Error).isTrue()
-        assertThat((result as RemoteMediator.MediatorResult.Error).throwable.message).isEqualTo("No Data")
+        assertThat(result is RemoteMediator.MediatorResult.Success).isTrue()
+        assertThat((result as RemoteMediator.MediatorResult.Success).endOfPaginationReached).isTrue()
     }
 
 }

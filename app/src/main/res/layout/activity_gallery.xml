@@ -37,12 +37,12 @@
                 android:padding="15dp"
                 android:textColor="@color/white"
                 android:textColorHint="@color/silver"
-                app:layout_constraintEnd_toStartOf="@+id/cancel_icon"
+                app:layout_constraintEnd_toStartOf="@+id/clear_icon"
                 app:layout_constraintStart_toEndOf="@+id/search_icon"
                 app:layout_constraintTop_toTopOf="parent" />
 
             <ImageView
-                android:id="@+id/cancel_icon"
+                android:id="@+id/clear_icon"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:contentDescription="@string/search_icon_cd"

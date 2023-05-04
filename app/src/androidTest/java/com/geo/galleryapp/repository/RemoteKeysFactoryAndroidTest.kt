@@ -3,7 +3,7 @@ package com.geo.galleryapp.repository
 import com.geo.galleryapp.models.ImageData
 import com.geo.galleryapp.models.RemoteKeys
 
-class RemoteKeysFactory {
+class RemoteKeysFactoryAndroidTest {
     private var defaultRepoId = 1994710325
 
     private fun create(id: Int, key: Int) : RemoteKeys {

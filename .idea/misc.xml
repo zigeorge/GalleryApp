@@ -3,9 +3,10 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="app/src/main/res/drawable/ic_refresh.xml" value="0.245" />
         <entry key="app/src/main/res/layout/activity_gallery.xml" value="0.23541666666666666" />
         <entry key="app/src/main/res/layout/activity_main.xml" value="0.328125" />
-        <entry key="app/src/main/res/layout/image_item.xml" value="0.16111111111111112" />
+        <entry key="app/src/main/res/layout/image_item.xml" value="0.34322916666666664" />
         <entry key="app/src/main/res/layout/network_state_item.xml" value="0.34322916666666664" />
       </map>
     </option>

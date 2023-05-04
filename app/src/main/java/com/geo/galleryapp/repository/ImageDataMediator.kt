@@ -6,7 +6,7 @@ import androidx.paging.LoadType.*
 import androidx.paging.PagingState
 import androidx.paging.RemoteMediator
 import androidx.room.withTransaction
-import com.geo.galleryapp.api.GalleryAPI
+import com.geo.galleryapp.api.GalleryApi
 import com.geo.galleryapp.db.GalleryDb
 import com.geo.galleryapp.db.RemoteKeysDao
 import com.geo.galleryapp.models.ImageData
@@ -18,7 +18,7 @@ import java.io.IOException
 @OptIn(ExperimentalPagingApi::class)
 class ImageDataMediator(
     private val db: GalleryDb,
-    private val api: GalleryAPI,
+    private val api: GalleryApi,
     private val searchString: String
 ) : RemoteMediator<Int, ImageData>() {
     private val imageDataDao = db.imageDataDao()
@@ -43,9 +43,7 @@ class ImageDataMediator(
                         ?.data?.lastOrNull()
                         ?.let { image -> remoteKeysDao.remoteKeysByRepoId(image.id) }
 
-                    if (currentPage == null) {
-                        return MediatorResult.Error(Exception("No Data"))
-                    } else if (currentPage.nextKey == null) {
+                    if (currentPage?.nextKey == null) {
                         return MediatorResult.Success(endOfPaginationReached = true)
                     }
                     currentPage.nextKey

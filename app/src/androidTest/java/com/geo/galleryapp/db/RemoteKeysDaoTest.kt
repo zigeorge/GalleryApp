@@ -1,9 +1,7 @@
 package com.geo.galleryapp.db
 
 import androidx.test.filters.SmallTest
-import com.geo.galleryapp.repository.ImageDataFactory
-import com.geo.galleryapp.repository.RemoteKeysFactory
-import com.google.common.truth.Truth
+import com.geo.galleryapp.repository.RemoteKeysFactoryAndroidTest
 import com.google.common.truth.Truth.assertThat
 import dagger.hilt.android.testing.HiltAndroidRule
 import dagger.hilt.android.testing.HiltAndroidTest
@@ -28,14 +26,14 @@ class RemoteKeysDaoTest {
     lateinit var database: GalleryDb
     private lateinit var dao: RemoteKeysDao
 
-    private lateinit var remoteKeysFactory: RemoteKeysFactory
+    private lateinit var remoteKeysFactory: RemoteKeysFactoryAndroidTest
 
 
     @Before
     fun setUp() {
         hiltRule.inject()
         dao = database.remoteKeysDao()
-        remoteKeysFactory = RemoteKeysFactory()
+        remoteKeysFactory = RemoteKeysFactoryAndroidTest()
     }
 
     @After

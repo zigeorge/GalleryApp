@@ -3,7 +3,7 @@ package com.geo.galleryapp.api
 import com.geo.galleryapp.models.ImageData
 import com.geo.galleryapp.models.ImageSearchResponse
 
-class FakeGalleryApi: GalleryAPI {
+class FakeGalleryApiTest: GalleryApi {
 
     companion object {
         private var index = 0

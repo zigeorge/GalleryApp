@@ -30,8 +30,8 @@ class RetrofitInstance {
                 .build()
         }
 
-        val api: GalleryAPI by lazy {
-            retrofit.create(GalleryAPI::class.java)
+        val api: GalleryApi by lazy {
+            retrofit.create(GalleryApi::class.java)
         }
     }
 }

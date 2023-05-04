@@ -1,12 +1,13 @@
 package com.geo.galleryapp.db
 
-import androidx.arch.core.executor.testing.InstantTaskExecutorRule
 import androidx.paging.PagingSource
 import androidx.test.filters.SmallTest
-import com.geo.galleryapp.repository.ImageDataFactory
+import com.geo.galleryapp.di.AppModule
+import com.geo.galleryapp.repository.ImageDataFactoryAndroidTest
 import com.google.common.truth.Truth.assertThat
 import dagger.hilt.android.testing.HiltAndroidRule
 import dagger.hilt.android.testing.HiltAndroidTest
+import dagger.hilt.android.testing.UninstallModules
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.runBlocking
 import kotlinx.coroutines.test.runTest
@@ -17,6 +18,7 @@ import org.junit.Test
 import javax.inject.Inject
 import javax.inject.Named
 
+//@UninstallModules(AppModule::class)
 @ExperimentalCoroutinesApi
 @SmallTest
 @HiltAndroidTest
@@ -30,14 +32,14 @@ class ImageDataDaoTest {
     lateinit var database: GalleryDb
     private lateinit var dao: ImageDataDao
 
-    private lateinit var imageDataFactory: ImageDataFactory
+    private lateinit var imageDataFactory: ImageDataFactoryAndroidTest
 
 
     @Before
     fun setUp() {
         hiltRule.inject()
         dao = database.imageDataDao()
-        imageDataFactory = ImageDataFactory()
+        imageDataFactory = ImageDataFactoryAndroidTest()
     }
 
     @After

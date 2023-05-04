@@ -59,9 +59,9 @@ class GalleryActivity : AppCompatActivity() {
 
             override fun onTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
                 if (binding.searchField.text.isNullOrEmpty()) {
-                    binding.cancelIcon.visibility = GONE
+                    binding.clearIcon.visibility = GONE
                 } else {
-                    binding.cancelIcon.visibility = VISIBLE
+                    binding.clearIcon.visibility = VISIBLE
                 }
             }
 
@@ -69,7 +69,7 @@ class GalleryActivity : AppCompatActivity() {
                 updateImageListFromSearch()
             }
         })
-        binding.cancelIcon.setOnClickListener {
+        binding.clearIcon.setOnClickListener {
             binding.searchField.setText("")
         }
     }
@@ -98,8 +98,10 @@ class GalleryActivity : AppCompatActivity() {
 
         lifecycleScope.launchWhenCreated {
             imagesAdapter.loadStateFlow.collect { loadStates ->
-                binding.swipeRefresh.isRefreshing =
-                    loadStates.mediator?.refresh is LoadState.Loading
+                runOnUiThread {
+                    binding.swipeRefresh.isRefreshing =
+                        loadStates.mediator?.refresh is LoadState.Loading
+                }
             }
         }
 

@@ -7,23 +7,24 @@ import androidx.paging.PagingData
 import com.geo.galleryapp.api.GalleryApi
 import com.geo.galleryapp.db.GalleryDb
 import com.geo.galleryapp.models.ImageData
-import com.geo.galleryapp.other.Constants.PAGE_SIZE
+import com.geo.galleryapp.other.Constants
 import kotlinx.coroutines.flow.Flow
 import javax.inject.Inject
 
 @OptIn(ExperimentalPagingApi::class)
-class GalleryDbRepository @Inject constructor(
+class FakeGalleryDbRepositoryAndroidTest @Inject constructor(
     private val api: GalleryApi,
     private val db: GalleryDb
-): GalleryRepository {
+) : GalleryRepository {
+
 
     override fun getImage(query: String): Flow<PagingData<ImageData>> {
         val pagingSourceFactory = { db.imageDataDao().galleryImages("%$query%") }
         return Pager(
             config = PagingConfig(
-                pageSize = PAGE_SIZE,
+                pageSize = Constants.PAGE_SIZE,
                 enablePlaceholders = true,
-                initialLoadSize = PAGE_SIZE
+                initialLoadSize = Constants.PAGE_SIZE
             ),
             pagingSourceFactory = pagingSourceFactory,
             remoteMediator = ImageDataMediator(db, api, query)
